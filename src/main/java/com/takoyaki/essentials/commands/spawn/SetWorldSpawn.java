@@ -9,6 +9,7 @@ import com.takoyaki.essentials.types.MinecraftPosition;
 import com.takoyaki.essentials.utils.CommandPermission;
 
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
 import static net.minecraft.server.command.CommandManager.literal;
@@ -37,6 +38,8 @@ public class SetWorldSpawn {
                 playerYaw,
                 playerPitch));
 
+        src.getPlayer().sendMessage(Text.translatable("cmd.spawn.set.success"), false);
+        
         return Command.SINGLE_SUCCESS;
     }
 }

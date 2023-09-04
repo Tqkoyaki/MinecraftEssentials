@@ -1,3 +1,3 @@
 {
-    "cmd.spawn.teleport.exception": "Spawn location is not set. Please set it first."
+    "cmd.spawn.set.success": "Spawn location set to your current position."
 }

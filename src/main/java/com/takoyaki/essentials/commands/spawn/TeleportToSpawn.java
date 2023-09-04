@@ -4,12 +4,11 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.takoyaki.essentials.states.WorldManager;
 import com.takoyaki.essentials.types.MinecraftPosition;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
@@ -41,6 +40,17 @@ public class TeleportToSpawn {
             return Command.SINGLE_SUCCESS;
         }
 
-        throw new SimpleCommandExceptionType(Text.translatable("cmd.spawn.teleport.exception")).create();
+        // Teleports the user to minecraft default spawn
+        final BlockPos spawnPos = src.getWorld().getSpawnPos();
+        src.getPlayer().teleport(
+            src.getServer().getOverworld(),
+            spawnPos.getX(),
+            spawnPos.getY(),
+            spawnPos.getZ(),
+            0,
+            0
+        );
+
+        return Command.SINGLE_SUCCESS;
     }
 }
